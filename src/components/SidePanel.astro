@@ -1,0 +1,71 @@
+---
+const { audience, related = [] } = Astro.props;
+---
+
+<aside class="side-panel">
+  <h2>This page is written for</h2>
+  <p>{audience}.</p>
+  {
+    related.length > 0 && (
+      <>
+        <h2>Other pathways</h2>
+        <div class="side-list">
+          {related.map((p) => (
+            <a class="side-link" href={`/${p.id}/`}>
+              {p.data.label}
+            </a>
+          ))}
+        </div>
+      </>
+    )
+  }
+</aside>
+
+<style>
+  .side-panel {
+    position: sticky;
+    top: 96px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--nh-radii-md);
+    background: var(--nh-theme-panel);
+    padding: 22px;
+  }
+
+  h2 {
+    font-size: 20px;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: var(--nh-theme-fg-muted);
+    margin-bottom: 18px;
+  }
+
+  .side-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .side-link {
+    padding: 11px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--nh-radii-sm);
+    background: rgba(0, 0, 0, 0.12);
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 13px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .side-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (max-width: 940px) {
+    .side-panel {
+      position: static;
+    }
+  }
+</style>

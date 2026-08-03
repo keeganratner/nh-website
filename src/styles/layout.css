@@ -1,0 +1,59 @@
+/* Page furniture and surfaces shared across more than one component.
+   Anything used by a single component lives in that component's own
+   <style> block instead. */
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: var(--nh-measure-max);
+  margin: 0 auto;
+  padding: 0 var(--nh-spacing-md);
+}
+
+/* The translucent card surface every panel on the site is built from. */
+.panel {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 30px;
+  padding: clamp(24px, 3vw, 36px);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+  box-shadow: var(--nh-shadow-card);
+}
+
+/* Small uppercase label above a heading. Used on the home hero and on
+   every pathway page. */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  font-weight: var(--nh-font-weights-body-bold);
+  letter-spacing: var(--nh-letter-spacing-eyebrow);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.kicker::before {
+  content: "";
+  width: 40px;
+  height: 2px;
+  border-radius: var(--nh-radii-rounded);
+  background: linear-gradient(
+    90deg,
+    var(--nh-theme-accent-emphasis),
+    var(--nh-colors-pink-500),
+    var(--nh-colors-coral-500)
+  );
+}

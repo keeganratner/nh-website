@@ -1,0 +1,113 @@
+/* Design tokens.
+   Colour ramps and semantic names follow the Neighbourhoods design system
+   (@neighbourhoods/design-system-styles). Values are copied from its built
+   dark theme so the site and the product app stay in step. */
+
+:root {
+  /* --- ramps --------------------------------------------------------- */
+
+  --nh-colors-white: #ffffff;
+  --nh-colors-black: #171717;
+
+  --nh-colors-eggplant-1000: #000000;
+  --nh-colors-eggplant-950: #0c0a0d;
+  --nh-colors-eggplant-900: #18151b;
+  --nh-colors-eggplant-800: #251f28;
+  --nh-colors-eggplant-700: #342d37;
+  --nh-colors-eggplant-650: #37303d;
+  --nh-colors-eggplant-600: #3d3443;
+  --nh-colors-eggplant-550: #514957;
+  --nh-colors-eggplant-500: #645d69;
+  --nh-colors-eggplant-400: #8b858e;
+  --nh-colors-eggplant-300: #b1aeb4;
+  --nh-colors-eggplant-200: #d8d6d9;
+  --nh-colors-eggplant-100: #ecebec;
+  --nh-colors-eggplant-50: #f5edf7;
+
+  --nh-colors-lavender-950: #090616;
+  --nh-colors-lavender-900: #1c1233;
+  --nh-colors-lavender-800: #372366;
+  --nh-colors-lavender-700: #533599;
+  --nh-colors-lavender-600: #6e46cc;
+  --nh-colors-lavender-500: #8a58ff;
+  --nh-colors-lavender-400: #a179ff;
+  --nh-colors-lavender-300: #b99bff;
+  --nh-colors-lavender-200: #d0bcff;
+  --nh-colors-lavender-100: #e8deff;
+  --nh-colors-lavender-50: #f3eeff;
+
+  /* Secondary hues. Not in the design system's ramps — taken from the
+     prototype, where they distinguish one pathway card from the next. */
+  --nh-colors-pink-500: #f069ad;
+  --nh-colors-coral-500: #ff7777;
+  --nh-colors-blue-500: #8a9bf4;
+  --nh-colors-green-500: #7bd6b5;
+
+  /* --- semantic ------------------------------------------------------ */
+
+  --nh-theme-bg-backdrop: var(--nh-colors-eggplant-950);
+  --nh-theme-bg-canvas: var(--nh-colors-eggplant-900);
+  --nh-theme-bg-surface: var(--nh-colors-eggplant-800);
+  --nh-theme-bg-element: var(--nh-colors-eggplant-700);
+  --nh-theme-bg-detail: var(--nh-colors-eggplant-550);
+
+  --nh-theme-accent-default: var(--nh-colors-lavender-400);
+  --nh-theme-accent-emphasis: var(--nh-colors-lavender-500);
+  --nh-theme-accent-muted: var(--nh-colors-lavender-600);
+  --nh-theme-accent-subtle: var(--nh-colors-lavender-900);
+
+  --nh-theme-fg-default: #f7f5ff;
+  --nh-theme-fg-muted: rgba(247, 245, 255, 0.72);
+  --nh-theme-fg-subtle: rgba(247, 245, 255, 0.55);
+  --nh-theme-fg-on-accent: var(--nh-colors-white);
+
+  /* Translucent layers over the canvas gradient. */
+  --nh-theme-panel: rgba(255, 255, 255, 0.065);
+  --nh-theme-panel-raised: rgba(255, 255, 255, 0.095);
+  --nh-theme-line: rgba(255, 255, 255, 0.13);
+  --nh-theme-line-strong: rgba(255, 255, 255, 0.22);
+
+  /* --- type ---------------------------------------------------------- */
+
+  --nh-font-families-headlines: "Apfel Grotezk", ui-sans-serif, system-ui, sans-serif;
+  --nh-font-families-body: "Apfel Grotezk", ui-sans-serif, system-ui, sans-serif;
+
+  --nh-font-weights-body-regular: 400;
+  --nh-font-weights-body-bold: 700;
+  --nh-font-weights-headlines-regular: 400;
+  --nh-font-weights-headlines-bold: 700;
+
+  --nh-line-heights-headlines-xl: 0.95;
+  --nh-line-heights-headlines-default: 1.05;
+  --nh-line-heights-body-default: 1.55;
+  --nh-line-heights-body-relaxed: 1.68;
+
+  /* Apfel Grotezk is wider and rounder than the prototype's Inter, so it
+     needs looser tracking than the prototype's -0.065em / -0.075em. */
+  --nh-letter-spacing-headlines: -0.025em;
+  --nh-letter-spacing-headlines-xl: -0.035em;
+  --nh-letter-spacing-body: 0;
+  --nh-letter-spacing-eyebrow: 0.08em;
+
+  /* --- space, radius, shadow ----------------------------------------- */
+
+  --nh-spacing-xs: 8px;
+  --nh-spacing-sm: 14px;
+  --nh-spacing-md: 22px;
+  --nh-spacing-lg: 38px;
+  --nh-spacing-xl: 64px;
+  --nh-spacing-xxl: 92px;
+
+  --nh-radii-sm: 14px;
+  --nh-radii-md: 28px;
+  --nh-radii-lg: 34px;
+  --nh-radii-rounded: 999px;
+
+  --nh-shadow-panel: 0 24px 90px rgba(0, 0, 0, 0.35);
+  --nh-shadow-card: 0 20px 70px rgba(0, 0, 0, 0.18);
+
+  /* --- layout -------------------------------------------------------- */
+
+  --nh-measure-max: 1160px;
+  --nh-measure-prose: 780px;
+}

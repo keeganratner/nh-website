@@ -1,0 +1,57 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { site } from '../data/site.js';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/layout.css';
+
+const { title, description, current, noindex = false } = Astro.props;
+const ogImage = new URL('/assets/img/og-banner.png', Astro.site);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+    <link
+      rel="preload"
+      href="/assets/fonts/ApfelGrotezk-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/ApfelGrotezk-Fett.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <ClientRouter />
+  </head>
+  <body>
+    <div class="noise" transition:persist></div>
+    <div class="shell">
+      <SiteHeader current={current} />
+      <main transition:animate="fade">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

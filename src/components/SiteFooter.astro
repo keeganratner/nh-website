@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '../data/site.js';
+import wordmark from '../assets/nh-wordmark.png';
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <Image src={wordmark} width={320} alt="Neighbourhoods" />
+    <span>{site.footerLine}</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 36px 0 50px;
+    color: var(--nh-theme-fg-subtle);
+  }
+
+  .footer-inner {
+    max-width: var(--nh-measure-max);
+    margin: 0 auto;
+    padding: 0 var(--nh-spacing-md);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-inner :global(img) {
+    height: 20px;
+    width: auto;
+    opacity: 0.72;
+  }
+</style>
