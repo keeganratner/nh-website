@@ -26,14 +26,17 @@ const { slug, label, hook, tone = 0 } = Astro.props;
     transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
   }
 
-  /* The glow that separates one card from its neighbours. */
+  /* The glow that separates one card from its neighbours. An ellipse, not a
+     circle: a circle is sized to the box's farthest corner, so in a box this
+     wide it is still opaque where it meets the top edge and clips into a hard
+     line. The ellipse fades out well inside the box on every axis. */
   .stake-card::before {
     content: '';
     position: absolute;
-    inset: auto -20% -35% 20%;
-    height: 120px;
-    filter: blur(4px);
-    background: radial-gradient(circle, var(--glow), transparent 62%);
+    inset: auto -20% -60% 10%;
+    height: 280px;
+    filter: blur(6px);
+    background: radial-gradient(ellipse at 50% 60%, var(--glow), transparent 60%);
   }
 
   .tone-0 {

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://neighbourhoods.network/sitemap-index.xml
+
+# Unlisted pages are deliberately absent from this file. Listing a path here
+# publishes it — robots.txt is world-readable. They are kept out of the
+# sitemap and served noindex instead.
