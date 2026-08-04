@@ -19,12 +19,13 @@ const { entry } = Astro.props;
 const { data } = entry;
 
 const { intro, sections } = splitSections(entry.rendered?.html);
-const audience = data.kicker.replace(/^For /, '');
 
-const related = (await getCollection('pathways', (p) => !p.data.unlisted))
-  .filter((p) => p.id !== entry.id)
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 6);
+const related = data.unlisted
+  ? []
+  : (await getCollection('pathways', (p) => !p.data.unlisted))
+      .filter((p) => p.id !== entry.id)
+      .sort((a, b) => a.data.order - b.data.order)
+      .slice(0, 6);
 ---
 
 <Base
@@ -36,15 +37,6 @@ const related = (await getCollection('pathways', (p) => !p.data.unlisted))
   <article>
     <section class="page-hero">
       <div class="container">
-        {
-          !data.unlisted && (
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-              <a href="/">Stakeholder paths</a>
-              <span aria-hidden="true">/</span>
-              <span>{data.kicker}</span>
-            </nav>
-          )
-        }
         <p class="kicker" transition:name={`title-${entry.id}`}>{data.kicker}</p>
         <h1 class="page-title">{data.title}</h1>
         <p class="page-subtitle">{data.subtitle}</p>
@@ -52,8 +44,8 @@ const related = (await getCollection('pathways', (p) => !p.data.unlisted))
     </section>
 
     <section class="page-body">
-      <div class="container body-grid">
-        <SidePanel audience={audience} related={data.unlisted ? [] : related} />
+      <div class:list={['container', 'body-grid', { solo: related.length === 0 }]}>
+        {related.length > 0 && <SidePanel related={related} />}
 
         <div class="content">
           <EssaySection html={intro} />
@@ -84,19 +76,7 @@ const related = (await getCollection('pathways', (p) => !p.data.unlisted))
     padding: 72px 0 54px;
   }
 
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    color: var(--nh-theme-fg-subtle);
-    font-size: 13px;
-    margin-bottom: 28px;
-  }
 
-  .breadcrumb a {
-    color: rgba(255, 255, 255, 0.76);
-    text-decoration: none;
-  }
 
   .page-title {
     font-size: clamp(46px, 6.5vw, 90px);
@@ -122,6 +102,11 @@ const related = (await getCollection('pathways', (p) => !p.data.unlisted))
     grid-template-columns: 0.72fr 1.28fr;
     gap: var(--nh-spacing-lg);
     align-items: start;
+  }
+
+  /* Single column, held to the content measure. */
+  .body-grid.solo {
+    grid-template-columns: minmax(0, 760px);
   }
 
   .content {

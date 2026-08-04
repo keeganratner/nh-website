@@ -32,7 +32,6 @@ const links = navSlugs
       />
     </a>
     <div class="nav-links">
-      <a class="pill nav-home" href="/">Stakeholder paths</a>
       {
         links.map((p) => (
           <a
@@ -124,8 +123,22 @@ const links = navSlugs
       display: none;
     }
 
-    .pill:not(.nav-home) {
+    /* One scrolling row. flex-start is required: under flex-end the overflow
+       sits off the left edge, clipped and unscrollable. */
+    .nav-links {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-links::-webkit-scrollbar {
       display: none;
+    }
+
+    .pill {
+      white-space: nowrap;
     }
   }
 </style>

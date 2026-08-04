@@ -14,7 +14,6 @@ const pathways = (
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <p class="kicker">{home.kicker}</p>
         <h1>
           {home.headingLead}<span class="gradient-text">{home.headingAccent}</span>
         </h1>
@@ -30,10 +29,16 @@ const pathways = (
             alt=""
           />
           <h2 class="panel-title">{home.panelTitle}</h2>
-          <p class="panel-copy">{home.panelCopy}</p>
-          <div class="meta-row">
-            {home.tags.map((tag) => <span class="tag">{tag}</span>)}
-          </div>
+          <ul class="status-list">
+            {
+              home.status.map(([surface, state]) => (
+                <li>
+                  <span>{surface}</span>
+                  <span class="tag">{state}</span>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </aside>
     </div>
@@ -42,9 +47,7 @@ const pathways = (
   <section class="pathways">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">{home.eyebrow}</p>
         <h2>{home.sectionHeading}</h2>
-        <p class="sub">{home.sectionSub}</p>
       </div>
       <div class="cards">
         {
@@ -123,30 +126,36 @@ const pathways = (
   }
 
   .hero-panel-mark {
-    width: 118px;
+    width: 72px;
     height: auto;
-    margin-bottom: 34px;
+    margin-bottom: 26px;
   }
 
   .panel-title {
-    font-size: 26px;
+    font-size: 22px;
     letter-spacing: -0.02em;
-    margin-bottom: 14px;
+    margin-bottom: 4px;
   }
 
-  .panel-copy {
-    color: var(--nh-theme-fg-muted);
-    line-height: var(--nh-line-heights-body-relaxed);
-  }
-
-  .meta-row {
+  .status-list li {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 26px;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    color: var(--nh-theme-fg-muted);
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .status-list li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
   }
 
   .tag {
+    flex: none;
     border: 1px solid var(--nh-theme-line);
     background: rgba(0, 0, 0, 0.18);
     color: var(--nh-theme-fg-muted);
@@ -163,26 +172,12 @@ const pathways = (
     margin-bottom: 28px;
   }
 
-  .eyebrow {
-    color: var(--nh-theme-fg-subtle);
-    font-size: 14px;
-    font-weight: var(--nh-font-weights-body-bold);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
 
   .section-head h2 {
     font-size: clamp(34px, 4.8vw, 62px);
     line-height: 0.98;
-    margin-top: 10px;
   }
 
-  .sub {
-    color: var(--nh-theme-fg-muted);
-    font-size: 18px;
-    max-width: var(--nh-measure-prose);
-    margin-top: 16px;
-  }
 
   .cards {
     display: grid;

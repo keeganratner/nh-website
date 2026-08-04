@@ -1,7 +1,6 @@
-/* Design tokens.
-   Colour ramps and semantic names follow the Neighbourhoods design system
-   (@neighbourhoods/design-system-styles). Values are copied from its built
-   dark theme so the site and the product app stay in step. */
+/* Design tokens. Colour ramps and semantic names follow the Neighbourhoods
+   design system (@neighbourhoods/design-system-styles), so the site and the
+   product app share one vocabulary. */
 
 :root {
   /* --- ramps --------------------------------------------------------- */
@@ -36,8 +35,8 @@
   --nh-colors-lavender-100: #e8deff;
   --nh-colors-lavender-50: #f3eeff;
 
-  /* Secondary hues. Not in the design system's ramps — taken from the
-     prototype, where they distinguish one pathway card from the next. */
+  /* Secondary hues. Not part of the design system ramps; they distinguish
+     one pathway card from the next. */
   --nh-colors-pink-500: #f069ad;
   --nh-colors-coral-500: #ff7777;
   --nh-colors-blue-500: #8a9bf4;
@@ -81,8 +80,8 @@
   --nh-line-heights-body-default: 1.55;
   --nh-line-heights-body-relaxed: 1.68;
 
-  /* Apfel Grotezk is wider and rounder than the prototype's Inter, so it
-     needs looser tracking than the prototype's -0.065em / -0.075em. */
+  /* Apfel Grotezk is wide and round, so it tracks looser than a typical
+     grotesk at display sizes. */
   --nh-letter-spacing-headlines: -0.025em;
   --nh-letter-spacing-headlines-xl: -0.035em;
   --nh-letter-spacing-body: 0;

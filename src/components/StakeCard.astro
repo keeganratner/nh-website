@@ -3,11 +3,11 @@ const { slug, label, hook, tone = 0 } = Astro.props;
 ---
 
 <a class={`stake-card tone-${tone}`} href={`/${slug}/`}>
-  <div>
-    <h3 transition:name={`title-${slug}`}>{label}</h3>
-    <p>{hook}</p>
-  </div>
-  <span class="arrow">Open this pathway</span>
+  <h3>
+    <span transition:name={`title-${slug}`}>{label}</span>
+    <span class="arrow" aria-hidden="true">→</span>
+  </h3>
+  <p>{hook}</p>
 </a>
 
 <style>
@@ -16,8 +16,6 @@ const { slug, label, hook, tone = 0 } = Astro.props;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 230px;
     padding: 24px;
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: var(--nh-radii-md);
@@ -26,14 +24,13 @@ const { slug, label, hook, tone = 0 } = Astro.props;
     transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
   }
 
-  /* The glow that separates one card from its neighbours. An ellipse, not a
-     circle: a circle is sized to the box's farthest corner, so in a box this
-     wide it is still opaque where it meets the top edge and clips into a hard
-     line. The ellipse fades out well inside the box on every axis. */
+  /* Ellipse, not circle: a circle sizes to the farthest corner and stays
+     opaque at the top edge, clipping to a hard line. Offsets in px so the
+     glow holds position at any grid row height. */
   .stake-card::before {
     content: '';
     position: absolute;
-    inset: auto -20% -60% 10%;
+    inset: auto -20% -140px 10%;
     height: 280px;
     filter: blur(6px);
     background: radial-gradient(ellipse at 50% 60%, var(--glow), transparent 60%);
@@ -68,33 +65,19 @@ const { slug, label, hook, tone = 0 } = Astro.props;
     margin-bottom: 12px;
   }
 
-  p {
-    color: var(--nh-theme-fg-muted);
-    margin-bottom: 22px;
-  }
-
+  /* inline-block: follows the last word when the label wraps, and transforms. */
   .arrow {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: var(--nh-font-weights-body-bold);
-  }
-
-  .arrow::after {
-    content: '→';
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 18px;
     transition: transform 0.2s ease;
   }
 
-  .stake-card:hover .arrow::after {
+  .stake-card:hover .arrow {
     transform: translateX(4px);
   }
 
-  @media (max-width: 640px) {
-    .stake-card {
-      min-height: 185px;
-    }
+  p {
+    color: var(--nh-theme-fg-muted);
   }
 </style>

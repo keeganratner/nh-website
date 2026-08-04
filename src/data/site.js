@@ -9,19 +9,21 @@ export const site = {
 };
 
 export const home = {
-  kicker: 'Neighbourhoods',
   headingLead: 'Choose your path into ',
   headingAccent: 'post-platform coordination.',
-  lede: 'Neighbourhoods is a grammar-based groupware framework. The proposition is the same, but the doorway changes: communities need agency, investors need a market thesis, developers need a contract surface, institutions need audit, and systems thinkers need to see how coordination patterns become shared infrastructure.',
-  panelTitle:
-    'Not one website for every reader. A different entrance for every background.',
-  panelCopy:
-    'Start where the reader already stands. Each pathway below opens a complete audience-specific page with its own language, emphasis, and call to action.',
-  tags: ['Grammars', 'Spaces', 'Identity', 'Runtime', 'Value flow'],
-  eyebrow: 'Stakeholder pathways',
-  sectionHeading: 'Begin from the reader’s world.',
-  sectionSub:
-    'Each page explains Neighbourhoods through a different centre of gravity: sovereignty, market formation, contribution accounting, systems change, formal engineering, institutional durability, cryptographic cooperation, research, or settlement.',
+  lede: 'Neighbourhoods is a grammar-based groupware framework. Communities need agency, investors need a market thesis, developers need a contract surface, institutions need audit, and systems thinkers need to see how coordination patterns become shared infrastructure.',
+  sectionHeading: 'Choose a starting point.',
+  panelTitle: 'What runs today',
+
+  // Status labels are the project's own, from the communications packet
+  // fact card. Self-reported, and they change as surfaces ship.
+  status: [
+    ['Grammar compiler, TypeScript and Rust emitters', 'Shipped'],
+    ['Streaming x-machine runtime', 'Shipped'],
+    ['Merkle logs and CRDT replication', 'Shipped'],
+    ['Six-axis space policy', 'In flight'],
+    ['Neighbourhoods Bazaar', 'Concept-stage'],
+  ],
 };
 
 // Slugs shown in the header, in order.
