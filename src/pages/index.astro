@@ -29,16 +29,10 @@ const pathways = (
             alt=""
           />
           <h2 class="panel-title">{home.panelTitle}</h2>
-          <ul class="status-list">
-            {
-              home.status.map(([surface, state]) => (
-                <li>
-                  <span>{surface}</span>
-                  <span class="tag">{state}</span>
-                </li>
-              ))
-            }
-          </ul>
+          <p class="panel-copy">{home.panelCopy}</p>
+          <div class="meta-row">
+            {home.tags.map((tag) => <span class="tag">{tag}</span>)}
+          </div>
         </div>
       </aside>
     </div>
@@ -126,36 +120,30 @@ const pathways = (
   }
 
   .hero-panel-mark {
-    width: 72px;
+    width: 118px;
     height: auto;
-    margin-bottom: 26px;
+    margin-bottom: 34px;
   }
 
   .panel-title {
-    font-size: 22px;
+    font-size: 26px;
     letter-spacing: -0.02em;
-    margin-bottom: 4px;
+    margin-bottom: 14px;
   }
 
-  .status-list li {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 14px;
-    padding: 13px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  .panel-copy {
     color: var(--nh-theme-fg-muted);
-    font-size: 15px;
-    line-height: 1.35;
+    line-height: var(--nh-line-heights-body-relaxed);
   }
 
-  .status-list li:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
   }
 
   .tag {
-    flex: none;
     border: 1px solid var(--nh-theme-line);
     background: rgba(0, 0, 0, 0.18);
     color: var(--nh-theme-fg-muted);
