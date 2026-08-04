@@ -19,7 +19,6 @@ const { entry } = Astro.props;
 const { data } = entry;
 
 const { intro, sections } = splitSections(entry.rendered?.html);
-const audience = data.kicker.replace(/^For /, '');
 
 const related = data.unlisted
   ? []
@@ -45,8 +44,8 @@ const related = data.unlisted
     </section>
 
     <section class="page-body">
-      <div class="container body-grid">
-        <SidePanel audience={audience} related={related} />
+      <div class:list={['container', 'body-grid', { solo: related.length === 0 }]}>
+        {related.length > 0 && <SidePanel related={related} />}
 
         <div class="content">
           <EssaySection html={intro} />
@@ -103,6 +102,11 @@ const related = data.unlisted
     grid-template-columns: 0.72fr 1.28fr;
     gap: var(--nh-spacing-lg);
     align-items: start;
+  }
+
+  /* Single column, held to the content measure. */
+  .body-grid.solo {
+    grid-template-columns: minmax(0, 760px);
   }
 
   .content {
