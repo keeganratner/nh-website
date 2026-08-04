@@ -1,18 +1,24 @@
 ---
-const { related = [] } = Astro.props;
+const { audience, related = [] } = Astro.props;
 ---
 
 <aside class="side-panel">
-  <h2>Other pathways</h2>
-  <div class="side-list">
-    {
-      related.map((p) => (
-        <a class="side-link" href={`/${p.id}/`}>
-          {p.data.label}
-        </a>
-      ))
-    }
-  </div>
+  <h2>This page is written for</h2>
+  <p>{audience}.</p>
+  {
+    related.length > 0 && (
+      <>
+        <h2>Other pathways</h2>
+        <div class="side-list">
+          {related.map((p) => (
+            <a class="side-link" href={`/${p.id}/`}>
+              {p.data.label}
+            </a>
+          ))}
+        </div>
+      </>
+    )
+  }
 </aside>
 
 <style>
@@ -28,12 +34,18 @@ const { related = [] } = Astro.props;
   h2 {
     font-size: 20px;
     letter-spacing: -0.015em;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: var(--nh-theme-fg-muted);
+    margin-bottom: 18px;
   }
 
   .side-list {
     display: grid;
     gap: 10px;
+    margin-top: 18px;
   }
 
   .side-link {
