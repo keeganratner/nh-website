@@ -2,12 +2,59 @@
    Anything used by a single component lives in that component's own
    <style> block instead. */
 
+/* The page backdrop. It reaches past both ends of the viewport so an
+   overscroll bounce uncovers more of the same gradient.
+
+   Each glow's radius is measured against the viewport, not this box —
+   farthest-corner from its own centre — so the reach uncovers more of each
+   circle without growing it. */
+.backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--nh-overscroll-reach));
+  bottom: calc(-1 * var(--nh-overscroll-reach));
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      circle calc(0.3 * hypot(82vw, 92vh)) at 18vw calc(var(--nh-overscroll-reach) + 8vh),
+      rgba(138, 88, 255, 0.32),
+      transparent
+    ),
+    radial-gradient(
+      circle calc(0.32 * hypot(82vw, 82vh)) at 82vw calc(var(--nh-overscroll-reach) + 18vh),
+      rgba(240, 105, 173, 0.24),
+      transparent
+    ),
+    radial-gradient(
+      circle calc(0.36 * hypot(62vw, 86vh)) at 62vw calc(var(--nh-overscroll-reach) + 86vh),
+      rgba(138, 155, 244, 0.18),
+      transparent
+    ),
+    linear-gradient(
+      180deg,
+      #030306 0 var(--nh-overscroll-reach),
+      var(--nh-theme-bg-canvas) calc(var(--nh-overscroll-reach) + 48vh),
+      #050508 calc(var(--nh-overscroll-reach) + 100vh) 100%
+    );
+}
+
+/* Reaches as far as the backdrop, the extra tiles filling the overscroll
+   gutters. The tile has to stay square: the source SVG carries a 1:1 viewBox
+   and no intrinsic size, so a rectangular tile letterboxes it and leaves the
+   grain short of the edges. */
 .noise {
   position: fixed;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--nh-overscroll-reach));
+  bottom: calc(-1 * var(--nh-overscroll-reach));
   pointer-events: none;
   z-index: 0;
   opacity: 0.15;
+  background-position: 0 var(--nh-overscroll-reach);
+  background-size: min(100%, 100vh);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
 }
 

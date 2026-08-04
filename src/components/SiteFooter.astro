@@ -13,9 +13,29 @@ import wordmark from '../assets/nh-wordmark.png';
 
 <style>
   .site-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, var(--nh-bar-line));
     padding: 36px 0 50px;
     color: var(--nh-theme-fg-subtle);
+  }
+
+  /* The header bar at full strength, mirrored: the deep edge faces the end of
+     the page. A shadow carries that edge past the document so a bounce at the
+     bottom keeps the tint going — a box tall enough to do the same would add
+     its whole reach to the page's scroll height. */
+  .site-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    backdrop-filter: blur(var(--nh-bar-blur));
+    background: linear-gradient(
+      180deg,
+      rgba(5, 5, 9, var(--nh-bar-inner)),
+      rgba(5, 5, 9, var(--nh-bar-edge))
+    );
+    box-shadow: 0 var(--nh-overscroll-reach) 0 var(--nh-overscroll-reach)
+      rgba(5, 5, 9, var(--nh-bar-edge));
   }
 
   .footer-inner {

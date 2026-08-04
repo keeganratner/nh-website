@@ -45,6 +45,7 @@ const ogImage = new URL('/assets/img/og-banner.png', Astro.site);
     <ClientRouter />
   </head>
   <body>
+    <div class="backdrop" transition:persist></div>
     <div class="noise" transition:persist></div>
     <div class="shell">
       <SiteHeader current={current} />

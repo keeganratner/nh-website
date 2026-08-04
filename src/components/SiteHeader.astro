@@ -47,14 +47,100 @@ const links = navSlugs
   </nav>
 </header>
 
+<script>
+  // 0 at the top of the page, 1 once the reader is RAMP px in. The header's
+  // tint, blur and feather all read from it. Above 1, EASE holds the morph
+  // back over the first part of the ramp and lets it accelerate into the end.
+  const RAMP = 120;
+  const EASE = 2;
+  const root = document.documentElement;
+
+  const paint = () => {
+    const travel = Math.min(Math.max(window.scrollY, 0) / RAMP, 1);
+    root.style.setProperty('--nh-scroll-depth', String(travel ** EASE));
+    // The hairline belongs to the closed bar, not to the morph: a state, not
+    // a position on the ramp.
+    root.style.setProperty('--nh-scroll-closed', travel === 1 ? '1' : '0');
+  };
+
+  let queued = false;
+
+  const onScroll = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      paint();
+    });
+  };
+
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('astro:page-load', paint);
+
+  paint();
+</script>
+
 <style>
   .site-header {
     position: sticky;
     top: 0;
     z-index: 20;
-    backdrop-filter: blur(18px);
-    background: linear-gradient(180deg, rgba(5, 5, 9, 0.78), rgba(5, 5, 9, 0.52));
-    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+
+    /* Softness of the edge that travels down the bar. */
+    --feather: 65px;
+
+    /* The surface at rest, as a fraction of its full strength. */
+    --tint: calc(0.7 + 0.3 * var(--nh-scroll-depth, 0));
+
+    /* How far a bounce travels before the gutter above is fully dark. */
+    --gutter-fade: 30vh;
+
+    /* The travelling edge: on the bar's top line at rest, on its bottom line
+       once the morph completes. There the remaining softness runs off the end
+       of the box, closing the edge. */
+    --edge: calc(
+      var(--nh-overscroll-reach) + var(--nh-scroll-depth, 0) *
+        (100% - var(--nh-overscroll-reach))
+    );
+
+    /* Gated on the closed state, so it lands on a finished bar. The fade only
+       ever runs at that boundary, which keeps the arrival from snapping. */
+    border-bottom: 1px solid
+      rgba(255, 255, 255, calc(var(--nh-bar-line) * var(--nh-scroll-closed, 0)));
+    transition: border-color 0.15s ease;
+  }
+
+  /* One tinted layer behind the nav, so the soft edge never touches the
+     wordmark or the links. Alpha and blur deepen with scroll depth while the
+     mask walks the edge down the bar, so the surface arrives top line first.
+
+     Above the bar it carries on past the top of the document, darkening with
+     distance, so a deeper bounce reveals a deeper tint. */
+  .site-header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(-1 * var(--nh-overscroll-reach));
+    bottom: 0;
+    z-index: -1;
+    backdrop-filter: blur(calc(var(--nh-scroll-depth, 0) * var(--nh-bar-blur)));
+    background: linear-gradient(
+      180deg,
+      rgba(5, 5, 9, 0.92) 0 calc(var(--nh-overscroll-reach) - var(--gutter-fade)),
+      rgba(5, 5, 9, calc(var(--nh-bar-edge) * var(--tint))) var(--nh-overscroll-reach),
+      rgba(5, 5, 9, calc(var(--nh-bar-inner) * var(--tint))) 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      #000 0 var(--edge),
+      transparent calc(var(--edge) + var(--feather))
+    );
+    mask-image: linear-gradient(
+      180deg,
+      #000 0 var(--edge),
+      transparent calc(var(--edge) + var(--feather))
+    );
   }
 
   .nav {

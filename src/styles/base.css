@@ -20,8 +20,23 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* How far page-wide fixed layers reach past each end of the viewport.
+     Comfortably more than either engine's elastic overscroll travel. */
+  --nh-overscroll-reach: 50vh;
+
+  /* The bar surface, shared by the header and the footer so the two read as
+     one pair. Held as alphas so the header can scale them by scroll depth.
+     "edge" faces the end of the page, "inner" faces the content. */
+  --nh-bar-edge: 0.78;
+  --nh-bar-inner: 0.52;
+  --nh-bar-blur: 18px;
+  --nh-bar-line: 0.09;
+}
+
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
@@ -30,12 +45,8 @@ body {
   font-weight: var(--nh-font-weights-body-regular);
   color: var(--nh-theme-fg-default);
   line-height: var(--nh-line-heights-body-default);
-  background:
-    radial-gradient(circle at 18% 8%, rgba(138, 88, 255, 0.32), transparent 30%),
-    radial-gradient(circle at 82% 18%, rgba(240, 105, 173, 0.24), transparent 32%),
-    radial-gradient(circle at 62% 86%, rgba(138, 155, 244, 0.18), transparent 36%),
-    linear-gradient(180deg, #030306 0%, var(--nh-theme-bg-canvas) 48%, #050508 100%);
-  background-attachment: fixed;
+  /* Base under the backdrop layer, covering the frame before it paints. */
+  background-color: #030306;
   min-height: 100vh;
 }
 
